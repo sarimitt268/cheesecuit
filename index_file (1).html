@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cheesecuit — Sweet Moments, One Cup at a Time</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cream: '#FAF6F0',
+                            beige: '#F5EBE0',
+                            pink: '#F472B6',
+                            softpink: '#FCE7F3',
+                            pinkhover: '#EC4899',
+                            brown: '#8D5B4C',
+                            darkbrown: '#5D3A2F',
+                        }
+                    },
+                    fontFamily: {
+                        heading: ['Fredoka', 'sans-serif'],
+                        body: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #FAF6F0;
+            color: #5D3A2F;
+        }
+        h1, h2, h3, h4, .font-heading {
+            font-family: 'Fredoka', cursive, sans-serif;
+        }
+        .soft-shadow {
+            box-shadow: 0 10px 25px -5px rgba(141, 91, 76, 0.08), 0 8px 10px -6px rgba(141, 91, 76, 0.04);
+        }
+        .soft-shadow-hover:hover {
+            box-shadow: 0 20px 30px -10px rgba(141, 91, 76, 0.15);
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-softpink selection:text-brand-brown">
+
+    <!-- A. NAVBAR -->
+    <header class="sticky top-0 z-40 bg-brand-cream/90 backdrop-blur-md border-b border-brand-brown/10 transition-all duration-300">
+        <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#home" class="flex items-center gap-2 text-2xl font-bold font-heading text-brand-brown tracking-wide">
+                <i class="fa-solid font-normal fa-cookie-bite text-brand-pink text-2xl"></i>
+                <span>Cheesecuit<span class="text-brand-pink">.</span></span>
+            </a>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex items-center gap-8 font-medium text-brand-darkbrown">
+                <a href="#home" class="hover:text-brand-pink transition-colors">Home</a>
+                <a href="#product" class="hover:text-brand-pink transition-colors">Our Product</a>
+                <a href="#about" class="hover:text-brand-pink transition-colors">About</a>
+                <a href="#contact" class="hover:text-brand-pink transition-colors">Contact</a>
+            </nav>
+
+            <!-- Desktop Cart & Order Button -->
+            <div class="hidden md:flex items-center gap-6">
+                <!-- Cart Icon Button -->
+                <button onclick="toggleCartModal()" class="relative group focus:outline-none" title="Lihat Keranjang">
+                    <div class="w-11 h-11 bg-white border border-brand-brown/10 rounded-full flex items-center justify-center text-brand-darkbrown group-hover:text-brand-pink transition-colors soft-shadow">
+                        <i class="fa-solid fa-cart-shopping text-lg"></i>
+                    </div>
+                    <span id="cart-badge" class="absolute -top-1 -right-1 bg-brand-pink text-white text-xs font-bold px-2 py-0.5 rounded-full shadow-md">0</span>
+                </button>
+
+                <a href="https://wa.me/6287729856498?text=Halo%20Cheesecuit!%20Aku%20tertarik%20untuk%20memesan%20Cheesecuit.%20Boleh%20info%20cara%20ordernya?" target="_blank" rel="noopener noreferrer" class="bg-brand-pink text-white px-6 py-2.5 rounded-full font-semibold shadow-md hover:bg-brand-pinkhover transition-all transform hover:-translate-y-0.5 inline-flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Order Now</span>
+                </a>
+            </div>
+
+            <!-- Mobile Cart & Hamburger Button -->
+            <div class="flex items-center gap-3 md:hidden">
+                <button onclick="toggleCartModal()" class="relative focus:outline-none">
+                    <div class="w-10 h-10 bg-white border border-brand-brown/10 rounded-full flex items-center justify-center text-brand-darkbrown">
+                        <i class="fa-solid fa-cart-shopping"></i>
+                    </div>
+                    <span id="cart-badge-mobile" class="absolute -top-1 -right-1 bg-brand-pink text-white text-xs font-bold px-1.5 py-0.2 rounded-full">0</span>
+                </button>
+                <button id="menu-btn" class="text-brand-darkbrown focus:outline-none p-2">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-brand-cream border-b border-brand-brown/10 px-6 py-4 space-y-3">
+            <a href="#home" class="block font-medium text-brand-darkbrown hover:text-brand-pink py-1">Home</a>
+            <a href="#product" class="block font-medium text-brand-darkbrown hover:text-brand-pink py-1">Our Product</a>
+            <a href="#about" class="block font-medium text-brand-darkbrown hover:text-brand-pink py-1">About</a>
+            <a href="#contact" class="block font-medium text-brand-darkbrown hover:text-brand-pink py-1">Contact</a>
+            <a href="https://wa.me/6287729856498?text=Halo%20Cheesecuit!%20Aku%20tertarik%20untuk%20memesan%20Cheesecuit.%20Boleh%20info%20cara%20ordernya?" target="_blank" rel="noopener noreferrer" class="block text-center bg-brand-pink text-white py-2.5 rounded-full font-semibold mt-4">
+                <i class="fa-brands fa-whatsapp mr-1"></i> Order Now
+            </a>
+        </div>
+    </header>
+
+    <!-- B. HERO SECTION -->
+    <section id="home" class="py-12 md:py-24 relative overflow-hidden">
+        <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+            <!-- Left Text Content -->
+            <div class="space-y-6 text-center md:text-left">
+                <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand-softpink text-brand-pink font-semibold text-sm">
+                    <i class="fa-solid fa-sparkles"></i>
+                    <span>Dessert Cheesecuit Kekinian</span>
+                </div>
+                <h1 class="text-4xl md:text-6xl font-bold text-brand-darkbrown leading-tight">
+                    Sweet Moments,<br>
+                    <span class="text-brand-pink">One Cup at a Time.</span>
+                </h1>
+                <p class="text-brand-brown/80 text-lg leading-relaxed max-w-lg mx-auto md:mx-0">
+                    Temukan manisnya Cheesecuit dalam setiap cup. Dessert creamy dengan pilihan rasa favorit yang siap menemani hari-harimu.
+                </p>
+
+                <!-- Spec Badges -->
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-4 pt-2">
+                    <div class="bg-white/80 border border-brand-brown/10 px-4 py-2 rounded-2xl flex items-center gap-2 soft-shadow">
+                        <i class="fa-solid fa-tag text-brand-pink"></i>
+                        <span class="font-bold text-brand-darkbrown">Rp5.000 <span class="text-xs font-normal text-brand-brown">/ cup</span></span>
+                    </div>
+                    <div class="bg-white/80 border border-brand-brown/10 px-4 py-2 rounded-2xl flex items-center gap-2 soft-shadow">
+                        <i class="fa-solid fa-wine-glass text-brand-pink"></i>
+                        <span class="font-bold text-brand-darkbrown">Ukuran 120 ml</span>
+                    </div>
+                </div>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-col sm:flex-row items-center justify-center md:justify-start gap-4 pt-4">
+                    <a href="https://wa.me/6287729856498?text=Halo%20Cheesecuit!%20Aku%20tertarik%20untuk%20memesan%20Cheesecuit.%20Boleh%20info%20cara%20ordernya?" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto bg-brand-pink hover:bg-brand-pinkhover text-white px-8 py-3.5 rounded-full font-bold shadow-lg shadow-brand-pink/20 transition-all transform hover:-translate-y-0.5 text-center flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span>Order Now</span>
+                    </a>
+                    <a href="#product" class="w-full sm:w-auto bg-white border border-brand-brown/20 text-brand-brown hover:bg-brand-beige px-8 py-3.5 rounded-full font-bold transition-all text-center flex items-center justify-center gap-2">
+                        <span>Explore Our Flavors</span>
+                        <i class="fa-solid fa-arrow-down text-sm"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Image (Gambar Paling Kanan: Gambar Utama) -->
+            <div class="relative flex justify-center">
+                <div class="absolute -top-6 -left-6 w-24 h-24 bg-brand-softpink rounded-full blur-2xl opacity-70"></div>
+                <div class="absolute -bottom-6 -right-6 w-32 h-32 bg-brand-beige rounded-full blur-2xl opacity-80"></div>
+                
+                <div class="relative w-full max-w-md aspect-square bg-white border-4 border-white rounded-3xl soft-shadow overflow-hidden group">
+                    <img src="cheesecuit.jpeg" alt="Cheesecuit Main Hero" class="w-full h-full object-cover rounded-2xl transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='cheesecuit.jpg.jpeg';">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- C. PRODUCT SECTION -->
+    <section id="product" class="py-16 bg-white border-y border-brand-brown/5">
+        <div class="max-w-6xl mx-auto px-6">
+            <!-- Section Header -->
+            <div class="text-center max-w-2xl mx-auto mb-16 space-y-3">
+                <span class="text-brand-pink font-semibold tracking-wider text-sm uppercase">Varian Rasa</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-darkbrown">Meet Our Cheesecuit</h2>
+                <p class="text-brand-brown/80">Three delicious flavors, one little cup of happiness.</p>
+            </div>
+
+            <!-- Product Cards Grid -->
+            <div class="grid md:grid-cols-3 gap-8">
+                
+                <!-- Card 1: Matcha Cheesecuit -->
+                <div class="bg-brand-cream rounded-3xl p-6 border border-brand-brown/10 soft-shadow soft-shadow-hover transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="relative w-full aspect-square bg-white rounded-2xl overflow-hidden mb-6 soft-shadow">
+                            <img src="matcha.png" alt="Matcha Cheesecuit" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='matcha.jpg.png';">
+                        </div>
+                        <h3 class="text-2xl font-bold text-brand-darkbrown mb-2">Matcha Cheesecuit</h3>
+                        <p class="text-brand-brown/80 text-sm leading-relaxed mb-4">
+                            Perpaduan rasa matcha khas yang otentik dengan tekstur dessert creamy dan lembut.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="pt-4 border-t border-brand-brown/10 mb-4 flex items-center justify-between">
+                            <span class="text-xs text-brand-brown block">Harga / 120ml</span>
+                            <span class="text-xl font-bold text-brand-darkbrown">Rp5.000</span>
+                        </div>
+
+                        <!-- Quantity & Add to Cart -->
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between bg-white px-3 py-1.5 rounded-xl border border-brand-brown/10">
+                                <span class="text-xs font-semibold text-brand-brown">Jumlah:</span>
+                                <div class="flex items-center gap-3">
+                                    <button onclick="changeQty('qty-matcha', -1)" class="w-7 h-7 bg-brand-cream rounded-lg text-brand-darkbrown font-bold hover:bg-brand-beige transition-colors">-</button>
+                                    <input type="number" id="qty-matcha" value="1" min="1" readonly class="w-8 text-center font-bold text-brand-darkbrown bg-transparent border-none focus:outline-none">
+                                    <button onclick="changeQty('qty-matcha', 1)" class="w-7 h-7 bg-brand-cream rounded-lg text-brand-darkbrown font-bold hover:bg-brand-beige transition-colors">+</button>
+                                </div>
+                            </div>
+                            <button onclick="addToCart('Matcha Cheesecuit', 5000, 'qty-matcha', 'matcha.png')" class="w-full bg-brand-pink hover:bg-brand-pinkhover text-white text-sm font-semibold py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-sm">
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Tambah ke Keranjang</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 2: Milo Cheesecuit -->
+                <div class="bg-brand-cream rounded-3xl p-6 border border-brand-brown/10 soft-shadow soft-shadow-hover transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="relative w-full aspect-square bg-white rounded-2xl overflow-hidden mb-6 soft-shadow">
+                            <img src="milo.png" alt="Milo Cheesecuit" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='milo.jpg.png';">
+                        </div>
+                        <h3 class="text-2xl font-bold text-brand-darkbrown mb-2">Milo Cheesecuit</h3>
+                        <p class="text-brand-brown/80 text-sm leading-relaxed mb-4">
+                            Dessert manis berlimpah cokelat Milo yang melimpah dan memanjakan lidah.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="pt-4 border-t border-brand-brown/10 mb-4 flex items-center justify-between">
+                            <span class="text-xs text-brand-brown block">Harga / 120ml</span>
+                            <span class="text-xl font-bold text-brand-darkbrown">Rp5.000</span>
+                        </div>
+
+                        <!-- Quantity & Add to Cart -->
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between bg-white px-3 py-1.5 rounded-xl border border-brand-brown/10">
+                                <span class="text-xs font-semibold text-brand-brown">Jumlah:</span>
+                                <div class="flex items-center gap-3">
+                                    <button onclick="changeQty('qty-milo', -1)" class="w-7 h-7 bg-brand-cream rounded-lg text-brand-darkbrown font-bold hover:bg-brand-beige transition-colors">-</button>
+                                    <input type="number" id="qty-milo" value="1" min="1" readonly class="w-8 text-center font-bold text-brand-darkbrown bg-transparent border-none focus:outline-none">
+                                    <button onclick="changeQty('qty-milo', 1)" class="w-7 h-7 bg-brand-cream rounded-lg text-brand-darkbrown font-bold hover:bg-brand-beige transition-colors">+</button>
+                                </div>
+                            </div>
+                            <button onclick="addToCart('Milo Cheesecuit', 5000, 'qty-milo', 'milo.png')" class="w-full bg-brand-pink hover:bg-brand-pinkhover text-white text-sm font-semibold py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-sm">
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Tambah ke Keranjang</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card 3: Oreo Cheesecuit -->
+                <div class="bg-brand-cream rounded-3xl p-6 border border-brand-brown/10 soft-shadow soft-shadow-hover transition-all duration-300 flex flex-col justify-between group">
+                    <div>
+                        <div class="relative w-full aspect-square bg-white rounded-2xl overflow-hidden mb-6 soft-shadow">
+                            <img src="oreo.png" alt="Oreo Cheesecuit" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" onerror="this.onerror=null; this.src='oreo.jpg.png';">
+                        </div>
+                        <h3 class="text-2xl font-bold text-brand-darkbrown mb-2">Oreo Cheesecuit</h3>
+                        <p class="text-brand-brown/80 text-sm leading-relaxed mb-4">
+                            Perpaduan keju creamy dengan rempahan renyah Oreo favorit semua orang.
+                        </p>
+                    </div>
+                    <div>
+                        <div class="pt-4 border-t border-brand-brown/10 mb-4 flex items-center justify-between">
+                            <span class="text-xs text-brand-brown block">Harga / 120ml</span>
+                            <span class="text-xl font-bold text-brand-darkbrown">Rp5.000</span>
+                        </div>
+
+                        <!-- Quantity & Add to Cart -->
+                        <div class="space-y-3">
+                            <div class="flex items-center justify-between bg-white px-3 py-1.5 rounded-xl border border-brand-brown/10">
+                                <span class="text-xs font-semibold text-brand-brown">Jumlah:</span>
+                                <div class="flex items-center gap-3">
+                                    <button onclick="changeQty('qty-oreo', -1)" class="w-7 h-7 bg-brand-cream rounded-lg text-brand-darkbrown font-bold hover:bg-brand-beige transition-colors">-</button>
+                                    <input type="number" id="qty-oreo" value="1" min="1" readonly class="w-8 text-center font-bold text-brand-darkbrown bg-transparent border-none focus:outline-none">
+                                    <button onclick="changeQty('qty-oreo', 1)" class="w-7 h-7 bg-brand-cream rounded-lg text-brand-darkbrown font-bold hover:bg-brand-beige transition-colors">+</button>
+                                </div>
+                            </div>
+                            <button onclick="addToCart('Oreo Cheesecuit', 5000, 'qty-oreo', 'oreo.png')" class="w-full bg-brand-pink hover:bg-brand-pinkhover text-white text-sm font-semibold py-2.5 rounded-xl transition-colors flex items-center justify-center gap-2 shadow-sm">
+                                <i class="fa-solid fa-cart-plus"></i>
+                                <span>Tambah ke Keranjang</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- D. ABOUT SECTION -->
+    <section id="about" class="py-16 md:py-24 relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-6 text-center space-y-6">
+            <div class="w-16 h-16 bg-brand-softpink text-brand-pink rounded-full flex items-center justify-center mx-auto text-2xl">
+                <i class="fa-solid fa-heart"></i>
+            </div>
+            <h2 class="text-3xl md:text-5xl font-bold text-brand-darkbrown">A Little Sweetness for Your Day</h2>
+            <p class="text-brand-brown/80 text-lg leading-relaxed max-w-2xl mx-auto">
+                Cheesecuit hadir untuk memberikan pengalaman menikmati dessert yang manis, creamy, dan menyenangkan dalam satu cup kecil. Dengan pilihan rasa Matcha, Milo, dan Oreo, Cheesecuit siap menjadi teman manis untuk menemani waktu santai, belajar, maupun berkumpul bersama teman.
+            </p>
+        </div>
+    </section>
+
+    <!-- E. PRICE / SPECIAL OFFER SECTION -->
+    <section class="py-16 bg-brand-softpink/50 border-y border-brand-pink/10">
+        <div class="max-w-4xl mx-auto px-6">
+            <div class="bg-white rounded-3xl p-8 md:p-12 border border-brand-pink/20 text-center soft-shadow space-y-6">
+                <span class="bg-brand-pink text-white text-xs font-bold uppercase tracking-wider px-4 py-1.5 rounded-full">Affordable Happiness</span>
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-darkbrown">Your Favorite Dessert, Only Rp5.000!</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-lg mx-auto py-4">
+                    <div class="p-4 bg-brand-cream rounded-2xl">
+                        <div class="text-brand-pink text-xl mb-1"><i class="fa-solid fa-tag"></i></div>
+                        <div class="font-bold text-brand-darkbrown">Rp5.000</div>
+                        <div class="text-xs text-brand-brown">Harga per cup</div>
+                    </div>
+                    <div class="p-4 bg-brand-cream rounded-2xl">
+                        <div class="text-brand-pink text-xl mb-1"><i class="fa-solid fa-box"></i></div>
+                        <div class="font-bold text-brand-darkbrown">120 ml</div>
+                        <div class="text-xs text-brand-brown">Ukuran cup</div>
+                    </div>
+                    <div class="p-4 bg-brand-cream rounded-2xl">
+                        <div class="text-brand-pink text-xl mb-1"><i class="fa-solid fa-layer-group"></i></div>
+                        <div class="font-bold text-brand-darkbrown">3 Varian</div>
+                        <div class="text-xs text-brand-brown">Matcha, Milo, Oreo</div>
+                    </div>
+                </div>
+
+                <div>
+                    <a href="https://wa.me/6287729856498?text=Halo%20Cheesecuit!%20Aku%20tertarik%20untuk%20memesan%20Cheesecuit.%20Boleh%20info%20cara%20ordernya?" target="_blank" rel="noopener noreferrer" class="bg-brand-pink hover:bg-brand-pinkhover text-white px-8 py-3.5 rounded-full font-bold shadow-md transition-all inline-flex items-center gap-2">
+                        <i class="fa-brands fa-whatsapp text-xl"></i>
+                        <span>Order via WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- F. CONTACT SECTION -->
+    <section id="contact" class="py-16 md:py-24">
+        <div class="max-w-4xl mx-auto px-6 text-center space-y-12">
+            <div class="space-y-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-darkbrown">Let's Get Your Cheesecuit!</h2>
+                <p class="text-brand-brown/80 text-lg">Ready to enjoy your favorite dessert? Yuk, pesan Cheesecuit sekarang!</p>
+            </div>
+
+            <!-- Social & Contact Links -->
+            <div class="grid sm:grid-cols-3 gap-6 max-w-2xl mx-auto">
+                <!-- WhatsApp -->
+                <a href="https://wa.me/6287729856498?text=Halo%20Cheesecuit!%20Aku%20tertarik%20untuk%20memesan%20Cheesecuit.%20Boleh%20info%20cara%20ordernya?" target="_blank" rel="noopener noreferrer" class="bg-white p-6 rounded-2xl border border-brand-brown/10 soft-shadow soft-shadow-hover transition-all flex flex-col items-center gap-3">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center text-2xl">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-brand-brown font-medium">WhatsApp</div>
+                        <div class="font-bold text-brand-darkbrown text-sm">0877-2985-6498</div>
+                    </div>
+                </a>
+
+                <!-- Instagram -->
+                <a href="https://www.instagram.com/helenyuniass/" target="_blank" rel="noopener noreferrer" class="bg-white p-6 rounded-2xl border border-brand-brown/10 soft-shadow soft-shadow-hover transition-all flex flex-col items-center gap-3">
+                    <div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-full flex items-center justify-center text-2xl">
+                        <i class="fa-brands fa-instagram"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-brand-brown font-medium">Instagram</div>
+                        <div class="font-bold text-brand-darkbrown text-sm">@helenyuniass</div>
+                    </div>
+                </a>
+
+                <!-- TikTok -->
+                <a href="https://www.tiktok.com/@elenniiyyy" target="_blank" rel="noopener noreferrer" class="bg-white p-6 rounded-2xl border border-brand-brown/10 soft-shadow soft-shadow-hover transition-all flex flex-col items-center gap-3">
+                    <div class="w-12 h-12 bg-slate-100 text-slate-800 rounded-full flex items-center justify-center text-2xl">
+                        <i class="fa-brands fa-tiktok"></i>
+                    </div>
+                    <div>
+                        <div class="text-xs text-brand-brown font-medium">TikTok</div>
+                        <div class="font-bold text-brand-darkbrown text-sm">@elenniiyyy</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- G. FOOTER -->
+    <footer class="bg-brand-darkbrown text-brand-cream py-12 border-t border-brand-brown/20">
+        <div class="max-w-6xl mx-auto px-6 text-center space-y-6">
+            <div class="flex items-center justify-center gap-2 text-2xl font-bold font-heading">
+                <i class="fa-solid fa-cookie-bite text-brand-pink"></i>
+                <span>Cheesecuit</span>
+            </div>
+            <p class="text-brand-beige/70 text-sm">"Sweet Moments, One Cup at a Time."</p>
+
+            <div class="flex justify-center gap-6 text-lg">
+                <a href="https://www.instagram.com/helenyuniass/" target="_blank" rel="noopener noreferrer" class="hover:text-brand-pink transition-colors"><i class="fa-brands fa-instagram"></i></a>
+                <a href="https://www.tiktok.com/@elenniiyyy" target="_blank" rel="noopener noreferrer" class="hover:text-brand-pink transition-colors"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://wa.me/6287729856498?text=Halo%20Cheesecuit!%20Aku%20tertarik%20untuk%20memesan%20Cheesecuit.%20Boleh%20info%20cara%20ordernya?" target="_blank" rel="noopener noreferrer" class="hover:text-brand-pink transition-colors"><i class="fa-brands fa-whatsapp"></i></a>
+            </div>
+
+            <div class="text-xs text-brand-beige/50 pt-4 border-t border-brand-cream/10">
+                &copy; 2026 Cheesecuit. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- H. CART MODAL / DRAWER -->
+    <div id="cart-modal" class="fixed inset-0 z-50 hidden bg-black/50 backdrop-blur-sm flex justify-end transition-opacity">
+        <div class="w-full max-w-md bg-white h-full flex flex-col shadow-2xl overflow-hidden">
+            <!-- Modal Header -->
+            <div class="p-6 bg-brand-cream border-b border-brand-brown/10 flex items-center justify-between">
+                <div class="flex items-center gap-2 text-xl font-bold font-heading text-brand-darkbrown">
+                    <i class="fa-solid fa-cart-shopping text-brand-pink"></i>
+                    <span>Keranjang Belanja</span>
+                </div>
+                <button onclick="toggleCartModal()" class="text-brand-brown hover:text-brand-pink text-xl p-1">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+
+            <!-- Cart Items Container -->
+            <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
+                <!-- Items inserted dynamically -->
+            </div>
+
+            <!-- Modal Footer / Total Price & Checkout -->
+            <div class="p-6 bg-brand-cream border-t border-brand-brown/10 space-y-4">
+                <div class="flex items-center justify-between font-bold text-lg text-brand-darkbrown">
+                    <span>Total Pembelian:</span>
+                    <span id="cart-total-price" class="text-brand-pink">Rp0</span>
+                </div>
+                <button onclick="checkoutWhatsApp()" class="w-full bg-brand-pink hover:bg-brand-pinkhover text-white font-bold py-3.5 rounded-full transition-all shadow-md flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-xl"></i>
+                    <span>Pesan via WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Navigation & Interactive Cart Logic -->
+    <script>
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+
+        // Cart Data State
+        let cart = [];
+
+        function changeQty(inputId, change) {
+            const qtyInput = document.getElementById(inputId);
+            let currentVal = parseInt(qtyInput.value) || 1;
+            currentVal += change;
+            if (currentVal < 1) currentVal = 1;
+            qtyInput.value = currentVal;
+        }
+
+        function addToCart(name, price, inputId, imageSrc) {
+            const qtyInput = document.getElementById(inputId);
+            const qty = parseInt(qtyInput.value) || 1;
+
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.qty += qty;
+            } else {
+                cart.push({ name, price, qty, imageSrc });
+            }
+
+            // Reset input card
+            qtyInput.value = 1;
+
+            updateCartUI();
+            
+            // Subtle toast / feedback
+            const toast = document.createElement('div');
+            toast.className = 'fixed bottom-6 right-6 bg-brand-darkbrown text-white px-5 py-3 rounded-2xl shadow-xl z-50 flex items-center gap-2 animate-bounce';
+            toast.innerHTML = `<i class="fa-solid fa-circle-check text-brand-pink"></i> <span>${qty} ${name} dimasukkan ke keranjang</span>`;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2500);
+        }
+
+        function updateCartUI() {
+            const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+            // Badges
+            document.getElementById('cart-badge').innerText = totalCount;
+            document.getElementById('cart-badge-mobile').innerText = totalCount;
+
+            // Items List
+            const cartContainer = document.getElementById('cart-items');
+            if (cart.length === 0) {
+                cartContainer.innerHTML = `
+                    <div class="text-center py-12 text-brand-brown/60 space-y-3">
+                        <i class="fa-solid fa-basket-shopping text-5xl text-brand-pink/30"></i>
+                        <p class="font-medium">Keranjang belanja Anda masih kosong.</p>
+                    </div>
+                `;
+            } else {
+                cartContainer.innerHTML = cart.map((item, index) => `
+                    <div class="flex items-center justify-between bg-brand-cream p-4 rounded-2xl border border-brand-brown/10">
+                        <div class="flex items-center gap-3">
+                            <img src="${item.imageSrc}" alt="${item.name}" class="w-14 h-14 object-cover rounded-xl border border-white soft-shadow">
+                            <div>
+                                <h4 class="font-bold text-brand-darkbrown text-sm">${item.name}</h4>
+                                <span class="text-xs text-brand-brown">Rp${item.price.toLocaleString('id-ID')} x ${item.qty}</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-brand-darkbrown text-sm">Rp${(item.price * item.qty).toLocaleString('id-ID')}</span>
+                            <button onclick="removeFromCart(${index})" class="text-red-400 hover:text-red-600 p-1">
+                                <i class="fa-solid fa-trash-can text-sm"></i>
+                            </button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+
+            // Total Price Display
+            document.getElementById('cart-total-price').innerText = `Rp${totalPrice.toLocaleString('id-ID')}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+        }
+
+        function toggleCartModal() {
+            const modal = document.getElementById('cart-modal');
+            modal.classList.toggle('hidden');
+        }
+
+        function checkoutWhatsApp() {
+            if (cart.length === 0) {
+                alert('Keranjang belanja Anda kosong. Silakan pilih varian rasa terlebih dahulu!');
+                return;
+            }
+
+            let message = "Halo Cheesecuit! Aku mau pesan:\n";
+            let total = 0;
+
+            cart.forEach(item => {
+                const subtotal = item.price * item.qty;
+                total += subtotal;
+                message += `- ${item.name} (${item.qty} cup): Rp${subtotal.toLocaleString('id-ID')}\n`;
+            });
+
+            message += `\n*Total Pesanan: Rp${total.toLocaleString('id-ID')}*\n\nMohon informasi ketersediaan dan proses pembayarannya ya! Terima kasih!`;
+
+            const encodedMessage = encodeURIComponent(message);
+            window.open(`https://wa.me/6287729856498?text=${encodedMessage}`, '_blank');
+        }
+
+        // Initialize UI
+        updateCartUI();
+    </script>
+</body>
+</html>
